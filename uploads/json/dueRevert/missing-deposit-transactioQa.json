@@ -1,0 +1,20 @@
+[
+  {
+    "blockchainId": "7939703442",
+    "receiverAddress": "7939703442",
+    "amount": 48.7946892548,
+    "total": 48.7946892548,
+    "tokenDetails": {
+      "name": "Debit"
+    },
+    "withdrawType": "internal",
+    "userRemarks": "Deducted from due wallet.",
+    "fee": 0,
+    "commission": 0,
+    "tokenPrice": 0.96890762,
+    "userDetails": {
+      "email": "dr.hall24@gmail.com",
+      "username": "drhall"
+    }
+  }
+]

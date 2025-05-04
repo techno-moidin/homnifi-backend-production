@@ -1,0 +1,76 @@
+options:
+  docker: true
+
+definitions:
+  script:
+    - &setup-env-variables
+      export SERVICE=$BITBUCKET_REPO_SLUG;
+      export ENV=$BITBUCKET_BRANCH;
+      
+
+  steps:
+    - step: &build
+        name: 'CI (Build)'
+        image: docker:20.10.8
+        script:
+          - *setup-env-variables
+          - export DOCKER_BUILDKIT=1
+          - export DOCKERFILE_PATH=./Dockerfile #change as per your path
+          - export DOCKERFILE_CONTEXT=./ #change as per your path
+          - docker build -f $DOCKERFILE_PATH $DOCKERFILE_CONTEXT
+          - printenv > .env
+          - tar -czvf project.tar.gz ./
+        artifacts:
+          - project.tar.gz
+        services:
+          - docker
+
+    - step: &deploy
+        name: 'CD (Deployment to Shared Docker VM)'
+        script:
+          - *setup-env-variables
+          - mkdir -p ~/.ssh
+          - export SSH_KEY_PATH="~/.ssh/remote_server"
+          - touch ~/.ssh/remote_server
+          - eval $(ssh-agent -s);
+          - (umask  077 ; echo $SHARED_DOCKER_HOST_DEPLOY_SSH_KEY | base64 -d > ~/.ssh/remote_server)
+          - chmod 600 ~/.ssh/remote_server
+          - export SSH_KEY_PATH="~/.ssh/remote_server"
+          - export SERVICE_FOLDER="${BITBUCKET_REPO_SLUG}-${BITBUCKET_BRANCH}"
+          - export SSH_OPTIONS="-o StrictHostKeyChecking=no ${SHARED_DOCKER_HOST_DEPLOY_SSH_USER}@${SHARED_DOCKER_HOST_DEPLOY_SSH_HOST} -p 934"
+          - ssh $SSH_OPTIONS -i ~/.ssh/remote_server "mkdir -p ~/apps/${SERVICE_FOLDER}"
+          # Upload compressed project file using SCP to remote server
+          - scp -o StrictHostKeyChecking=no -v -P 934 -i ~/.ssh/remote_server project.tar.gz "${SHARED_DOCKER_HOST_DEPLOY_SSH_USER}@${SHARED_DOCKER_HOST_DEPLOY_SSH_HOST}:/home/${SHARED_DOCKER_HOST_DEPLOY_SSH_USER}/apps/${SERVICE_FOLDER}"
+          # Unarchive project file using tar
+          - ssh $SSH_OPTIONS -i ~/.ssh/remote_server "cd ~/apps/${SERVICE_FOLDER}; tar -xzvf project.tar.gz"
+          # Start docker-compose with build option
+          - ssh $SSH_OPTIONS -i ~/.ssh/remote_server "docker compose -f ~/apps/${SERVICE_FOLDER}/docker-compose.yml up -d --build"
+          # (Debug) Print out active containers
+          - ssh $SSH_OPTIONS -i ~/.ssh/remote_server "docker ps"
+
+pipelines:
+  default:
+    - step: *build
+
+  branches:
+    dev:
+      - stage:
+          name: CICD
+          deployment: staging
+          steps:
+            - step: *build
+            - step: *deploy
+    stage:
+      - stage:
+          name: CICD
+          deployment: staging
+          steps:
+            - step: *build
+            - step: *deploy
+    main:
+      - stage:
+          name: CICD
+          deployment: production
+          steps:
+            - step: *build
+            - step: *deploy

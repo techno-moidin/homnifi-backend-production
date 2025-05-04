@@ -1,0 +1,20 @@
+{{>header}}
+<div style="font-family: 'Rubik', sans-serif; background-color: #DEF7FF; padding: 20px 0px; width: 100%; max-width: 600px; margin: 25px auto 0; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 15px;">
+  <div style="padding: 20px; background-color: #DEF7FF; align-items: start; text-align: left;">
+    <p style="font-size: 24px; font-weight: bold;">Dear {{customerName}},</p>
+    <p style="font-size: 16px;">{{message}}</p>
+    <div style="background-color: #DEF7FF; padding: 15px; margin: 20px 0; border-radius: 10px; display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px;">
+      <div style="flex-basis: 100%; max-width: 150px; margin-right: 20px;">
+        <img src="https://storage.googleapis.com/softbuilder/homnifi/img/machine.png" alt="Machine Image" style="width: 100%; border-radius: 10px;">
+      </div>
+      <div style="flex-grow: 1;">
+        <p style="margin: 5px 0; font-size: 16px;"><strong>Date and Time:</strong> {{dateTime}}</p>
+        <a href="https://homnifi.com/dashboard" style="display: inline-block; background-color: #0066CC; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 15px; font-weight: bold;">ACCESS NOW</a>
+      </div>
+    </div>
+    <p style="font-size: 16px;">Failure to complete your payment will result in the suspension of your SuperNode rewards.</p>
+    <p style="font-size: 16px;">If you have any questions or need further assistance, please raise a ticket from our Customer Care platform.</p>
+    <p style="font-size: 16px;">Warm regards,<br>The Homnifi Team</p>
+  </div>
+</div>
+{{>footer}}

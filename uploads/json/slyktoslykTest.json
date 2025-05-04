@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "67900a2e1aee10eb37134741",
+    "bid": 8701281011,
+    "wallet_name": "MetaMask",
+    "address": "0xb8A5e07D6d65Eb9E0780E317c54b6923797C97Ff",
+    "token": "SlyK",
+    "amount": 475.0,
+    "period": 63072000,
+    "start_staking_date": "2025-01-21T20:57:22.000Z",
+    "end_staking_date": "2027-01-21T20:57:22.000Z",
+    "tx": "0x3083880bddab1adb302eea38fc687c6704791e245d46dcf8b04852dec7e0a977",
+    "status": "active",
+    "claimed_amount": 475.0,
+    "claimed_date": "2025-01-21T20:58:04.849Z",
+    "claimed_request_id": "67900a5c37f57d49f1bcf659",
+    "is_claimed": 1,
+    "deleted_at": null,
+    "created_at": "2025-01-21T20:57:18.184Z",
+    "updated_at": "2025-01-21T20:58:07.336Z",
+    "__v": 0,
+    "service_fee": 0
+  }
+]

@@ -1,0 +1,33 @@
+[
+  {
+    "_id": "67939f8c41ca11b12758e7f7",
+    "serialNumber": 1338866,
+    "requestId": "D0x1338866595576",
+    "user": "66c739e74dd672e9ccc70a0d",
+    "toWallet": "66fa869572ee5c2821c30057",
+    "onChainWallet": "",
+    "toWalletTrx": "67939f8c41ca11b12758e7f2",
+    "token": "66ad2270a0b7dc415a956853",
+    "network": "",
+    "blockchainId": 2009847943,
+    "fromAmount": 0,
+    "amount": 31.8666,
+    "currentRateInUSD": 0,
+    "convertedRateInUSD": 0,
+    "transactionStatus": "success",
+    "confirmation": "-",
+    "hash": "67939f8b1224c8908e438e45",
+    "cLFI-W / cLFi-R": "67939f8b1224c8908e438e45",
+    "remarks": "",
+    "settingsUsed": "6784dcf8b8029cca020b952e",
+    "newBalance": 31.8666,
+    "platform": "",
+    "previousBalance": 0,
+    "isOnChainDeposit": false,
+    "deletedAt": "",
+    "createdAt": "2025-01-24T14:11:24.502Z",
+    "updatedAt": "2025-01-24T14:11:24.502Z",
+    "fromToken": "",
+    "note": ""
+  }
+]

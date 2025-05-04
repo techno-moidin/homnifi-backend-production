@@ -1,0 +1,21 @@
+#change as per your requirements only keep netowrks under services and networks. follow the document
+# version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - proxy_core_network
+    ports:
+      - '3006:5000'
+  # Add more containers below (devops-tmp-docker-backend-service-postgres, etc.)
+  
+networks:
+  proxy_core_network:
+    name: proxy_core_network
+    external: true
